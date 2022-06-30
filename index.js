@@ -17,16 +17,38 @@ let todos = [
         title: "Jaga jarak",
         isDone: false
     },
+    {
+        id: 3,
+        title: "Jaga Mata",
+        isDone: true
+    },
 ]
 
 //GET list route: simply send arr of obj todos on your user screen
 // Create method GET here
+app.get("/todos", (req, res) => {
+    res.send({ data: todos });
+  });
+
+
 
 //GET detail route: send the todo obj, by received id request params
 // Create method GET by received id here
+app.get("/todo/:id", (req, res) => {
+    const id = req.params.id;
+    const index = id - 1;
+    res.send(todos[index]);
+  });
+
 
 //POST route: receive json body request, from user input, then push to todos array
 // Create method POST here
+app.post("/todo", (req, res) => {
+    todos = [...todos, req.body];
+    res.send({ data: todos });
+  });
+
+
 
 //PATCH route: receive json body request, from user input, then push to todos array
 //by object id
